@@ -2,7 +2,6 @@ import { Box, Button, Group } from '@mantine/core';
 import Link from 'next/link';
 import classes from './Header.module.scss';
 import Logo from '@/components/ui/Logo';
-import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 
 const Header = () => (
   <Box>
@@ -15,10 +14,14 @@ const Header = () => (
           {/*<ColorSchemeToggle />*/}
         </Group>
         <Group>
-          <Button size="sm" variant="default">
-            Вход
-          </Button>
-          <Button size="sm">Регистрация</Button>
+          <Link href="/auth/login/">
+            <Button size="sm" variant="default">
+              Вход
+            </Button>
+          </Link>
+          <Link href="/auth/register/">
+            <Button size="sm">Регистрация</Button>
+          </Link>
         </Group>
       </Group>
     </header>
