@@ -11,7 +11,6 @@ const Header = () => (
           <Link href="/" className={classes.link}>
             <Logo />
           </Link>
-          {/*<ColorSchemeToggle />*/}
         </Group>
         <Group>
           <Link href="/auth/login/">

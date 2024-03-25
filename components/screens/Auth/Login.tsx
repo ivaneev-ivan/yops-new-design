@@ -1,17 +1,8 @@
 'use client';
 
-import {
-  Anchor,
-  Button,
-  Checkbox,
-  Paper,
-  PasswordInput,
-  Text,
-  TextInput,
-  Title,
-} from '@mantine/core';
-import classes from './Login.module.scss';
+import { Button, Checkbox, Paper, PasswordInput, Text, TextInput, Title } from '@mantine/core';
 import Link from 'next/link';
+import classes from './Login.module.scss';
 
 const LoginScreen = () => (
   <div className={classes.wrapper}>
