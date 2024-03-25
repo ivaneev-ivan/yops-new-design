@@ -3,6 +3,7 @@ import Header from '@/components/ui/Header/Header';
 import '@mantine/core/styles.css';
 import { theme } from '@/theme';
 import Footer from '@/components/ui/Footer/Footer';
+import ContextProvider from '@/context/ContextProvider';
 
 export const metadata = {
   title: 'Главная страница',
@@ -21,11 +22,13 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>
-          <Header />
-          {children}
-          <Footer />
-        </MantineProvider>
+        <ContextProvider>
+          <MantineProvider theme={theme}>
+            <Header />
+            {children}
+            <Footer />
+          </MantineProvider>
+        </ContextProvider>
       </body>
     </html>
   );
