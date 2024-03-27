@@ -1,11 +1,11 @@
 'use client';
 
-import { Box, Button, Group, Text } from '@mantine/core';
+import Logo from '@/components/ui/Logo';
+import { logout } from '@/context/features/UserSlice';
+import { useAppDispatch, useAppSelector } from '@/context/store';
+import { Box, Button, Group } from '@mantine/core';
 import Link from 'next/link';
 import classes from './Header.module.scss';
-import Logo from '@/components/ui/Logo';
-import { useAppDispatch, useAppSelector } from '@/context/store';
-import { logout } from '@/context/features/UserSlice';
 
 const Header = () => {
   const user = useAppSelector((state) => state.userState.user);
@@ -22,19 +22,21 @@ const Header = () => {
           <Group>
             {user === null ? (
               <>
-                <Link href="/auth/login/">
-                  <Button size="sm" variant="default">
+                <Link href="/login/">
+                  <Button size="compact-sm" variant="default">
                     Вход
                   </Button>
                 </Link>
-                <Link href="/auth/register/">
-                  <Button size="sm">Регистрация</Button>
+                <Link href="/register/">
+                  <Button size="compact-sm">Регистрация</Button>
                 </Link>
               </>
             ) : (
               <>
-                <Text>{user.email}</Text>
-                <Button onClick={() => dispatch(logout())} size="sm">
+                <Link href="/profile/">
+                  <Button size="compact-sm">Личный кабинет</Button>
+                </Link>
+                <Button onClick={() => dispatch(logout())} size="compact-sm">
                   Выйти
                 </Button>
               </>

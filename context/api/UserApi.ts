@@ -18,14 +18,10 @@ export const userApi = createApi({
           headers: { Authorization: `Token ${token}` },
         };
       },
-      transformResponse: (result: { data: IUser }) => result.data,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setUser({ ...data, accessToken: args }));
-        } catch (error) {
-          /* empty */
-        }
+        const { data } = await queryFulfilled;
+        console.log('eroror');
+        await dispatch(setUser({ ...data, accessToken: args }));
       },
     }),
   }),

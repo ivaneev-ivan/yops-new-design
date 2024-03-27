@@ -5,11 +5,6 @@ import { theme } from '@/theme';
 import Footer from '@/components/ui/Footer/Footer';
 import ContextProvider from '@/context/ContextProvider';
 
-export const metadata = {
-  title: 'Главная страница',
-  description: '',
-};
-
 export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang="ru">

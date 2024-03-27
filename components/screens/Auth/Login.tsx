@@ -1,5 +1,7 @@
 'use client';
 
+import ErrorAlert from '@/components/screens/Auth/ErrorAlert';
+import { useLoginUserMutation } from '@/context/api/AuthApi';
 import {
   Button,
   Center,
@@ -12,17 +14,21 @@ import {
   Title,
 } from '@mantine/core';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import classes from './Login.module.scss';
-import { useLoginUserMutation } from '@/context/api/AuthApi';
-import ErrorAlert from '@/components/screens/Auth/ErrorAlert';
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [loginUser, { isError, error, isLoading }] = useLoginUserMutation();
+  const [loginUser, { isError, error, isLoading, isSuccess }] = useLoginUserMutation();
   const submit = () => {
     loginUser(formData);
   };
+
+  if (isSuccess) {
+    redirect('/profile/bought/');
+  }
+
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30} mb={20}>
@@ -68,8 +74,14 @@ const LoginScreen = () => {
             </Button>
             <Text ta="center" mt="md">
               Нет аккаунта?{' '}
-              <Link className={classes.link} href="/auth/register/">
+              <Link className={classes.link} href="/register/">
                 Зарегистрироваться
+              </Link>
+            </Text>
+            <Text ta="center" mt="md">
+              Забыли пароль?{' '}
+              <Link className={classes.link} href="/password_reset/">
+                Сбросить пароль
               </Link>
             </Text>
           </>

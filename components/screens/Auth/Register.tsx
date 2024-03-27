@@ -1,5 +1,7 @@
 'use client';
 
+import ErrorAlert from '@/components/screens/Auth/ErrorAlert';
+import { useRegisterUserMutation } from '@/context/api/AuthApi';
 import {
   Button,
   Center,
@@ -11,19 +13,22 @@ import {
   Title,
 } from '@mantine/core';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import classes from './Login.module.scss';
-import ErrorAlert from '@/components/screens/Auth/ErrorAlert';
-import { useRegisterUserMutation } from '@/context/api/AuthApi';
+
+const initState = { email: '', password: '', password1: '' };
 
 const RegisterScreen = () => {
-  const [data, setData] = useState({ email: '', password: '', password1: '' });
+  const [data, setData] = useState(initState);
   const [IsPasswordNotCorrect, setIsPasswordNotCorrect] = useState(false);
-  const [registerUser, { isLoading, isError, error }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isError, error, isSuccess }] = useRegisterUserMutation();
   const onInputChange = (e: FormEvent<HTMLInputElement>, key: string) => {
     setData({ ...data, [key]: e.currentTarget.value });
   };
-
+  if (isSuccess) {
+    redirect('/profile/new/');
+  }
   const onSubmit = () => {
     if (data.password !== data.password1) {
       setIsPasswordNotCorrect(true);
@@ -47,6 +52,19 @@ const RegisterScreen = () => {
           <>
             {IsPasswordNotCorrect && (
               <ErrorAlert title="non_field_errors" errors={['Пароли не совпадают']} />
+            )}
+            {isError && (
+              <>
+                {
+                  // @ts-ignore
+                  Object.keys(error.data).map((key) => {
+                    // @ts-ignore
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
+                    const data = error.data[key];
+                    return <ErrorAlert key={key} title={key} errors={data} />;
+                  })
+                }
+              </>
             )}
             <TextInput
               value={data.email}
@@ -78,7 +96,7 @@ const RegisterScreen = () => {
             </Button>
             <Text ta="center" mt="md">
               Есть аккаунт?{' '}
-              <Link className={classes.link} href="/auth/login/">
+              <Link className={classes.link} href="/login/">
                 Войти
               </Link>
             </Text>

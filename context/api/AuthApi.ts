@@ -13,7 +13,7 @@ export const authApi = createApi({
     baseUrl: `${BASE_URL}/auth/`,
   }),
   endpoints: (builder) => ({
-    loginUser: builder.mutation<{ auth_token: string; status: string }, IAuthData>({
+    loginUser: builder.mutation<{ auth_token: string }, IAuthData>({
       query(data) {
         return {
           url: 'token/login/',
@@ -27,7 +27,7 @@ export const authApi = createApi({
           const a = await queryFulfilled;
           const token = a.data.auth_token;
           await dispatch(userApi.endpoints.getMe.initiate(token));
-        } catch (error) {
+        } catch (e) {
           /* empty */
         }
       },
