@@ -8,3 +8,12 @@ export interface IGenericResponse {
   status: string;
   message: string;
 }
+
+export interface IOrder {
+  id: number;
+  count_configs: number;
+  is_own_server: boolean;
+  user: number;
+  location: number;
+  solar: number;
+}

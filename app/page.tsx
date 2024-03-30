@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 const getServices: () => Promise<Service[]> = async () => {
-  const response = await fetch(`${BASE_URL}/api/v1/services`, { next: { revalidate: 3600 } });
+  const response = await fetch(`${BASE_URL}/api/locations/`, { next: { revalidate: 3600 } });
   return (await response.json()) as Service[];
 };
 

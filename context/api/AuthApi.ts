@@ -29,6 +29,8 @@ export const authApi = createApi({
           await dispatch(userApi.endpoints.getMe.initiate(token));
         } catch (e) {
           /* empty */
+          console.log('error');
+          console.log(e);
         }
       },
     }),

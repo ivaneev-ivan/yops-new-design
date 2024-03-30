@@ -1,4 +1,4 @@
-import { Container, Title, Text, Button, Group } from '@mantine/core';
+import { Button, Container, Group, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 import { Illustration } from './Illustration';
 import classes from './NotFound.module.scss';

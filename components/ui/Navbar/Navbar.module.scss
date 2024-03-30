@@ -1,10 +1,23 @@
+
+.box {
+  display: flex;
+  @media (max-width: $mantine-breakpoint-sm) {
+    flex-direction: column;
+
+  }
+}
+
 .navbar {
-  height: rem(800px);
-  width: rem(300px);
+  height: 100vh;
+  width: rem(200px);
   padding: var(--mantine-spacing-md);
   display: flex;
   flex-direction: column;
   border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  @media (max-width: $mantine-breakpoint-sm) {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .navbarMain {
@@ -56,6 +69,7 @@
   background-color: var(--mantine-color-blue-light);
   color: var(--mantine-color-blue-light-color);
   transition: all ease 0.5s;
+
   .linkIcon {
     color: var(--mantine-color-blue-light-color);
   }
@@ -70,4 +84,14 @@
   margin-right: var(--mantine-spacing-sm);
   width: rem(25px);
   height: rem(25px);
+}
+
+.content {
+  width: calc(100% - 220px);
+  height: rem(800px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    width: 100%;
+    height: 50vh;
+  }
 }

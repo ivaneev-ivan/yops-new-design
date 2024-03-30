@@ -1,4 +1,6 @@
-import { Group } from '@mantine/core';
+'use client';
+
+import { Group, Paper } from '@mantine/core';
 import { IconBox, IconProps, IconShoppingCart } from '@tabler/icons-react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -20,7 +22,12 @@ const data: INavbarLink[] = [
     icon: IconShoppingCart,
   },
 ];
+
 export function Navbar({ children, current }: { children: ReactNode; current: string }) {
+  // const user = useAppSelector((state) => state.userState.user);
+  // if (user === null) {
+  //   redirect('/login/');
+  // }
   const links = data.map((item) => {
     const active = current === item.link ? classes.activeLink : classes.link;
     return (
@@ -32,11 +39,13 @@ export function Navbar({ children, current }: { children: ReactNode; current: st
   });
 
   return (
-    <Group>
+    <Group className={classes.box}>
       <nav className={classes.navbar}>
         <div className={classes.navbarMain}>{links}</div>
       </nav>
-      <div>{children}</div>
+      <Paper p={10} className={classes.content}>
+        {children}
+      </Paper>
     </Group>
   );
 }

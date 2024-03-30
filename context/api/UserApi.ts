@@ -20,7 +20,6 @@ export const userApi = createApi({
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
-        console.log('eroror');
         await dispatch(setUser({ ...data, accessToken: args }));
       },
     }),

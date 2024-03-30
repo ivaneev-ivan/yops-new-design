@@ -5,7 +5,6 @@ import { useLoginUserMutation } from '@/context/api/AuthApi';
 import {
   Button,
   Center,
-  Checkbox,
   Loader,
   Paper,
   PasswordInput,
@@ -68,7 +67,6 @@ const LoginScreen = () => {
               mt="md"
               size="md"
             />
-            <Checkbox label="Остаться авторизованным" mt="xl" size="md" />
             <Button onClick={submit} fullWidth mt="xl" size="md">
               Войти
             </Button>

@@ -33,7 +33,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link href="/profile/">
+                <Link href="/profile/bought">
                   <Button size="compact-sm">Личный кабинет</Button>
                 </Link>
                 <Button onClick={() => dispatch(logout())} size="compact-sm">

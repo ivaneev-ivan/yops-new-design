@@ -1,4 +1,4 @@
-import { Button, Container, Group, Text } from '@mantine/core';
+import { Container, Text } from '@mantine/core';
 import classes from './HeroTitle.module.scss';
 import YopsVpn from '@/components/ui/YopsVpn';
 
@@ -13,19 +13,6 @@ const HeroTitle = () => (
         быстрого доступа. Мы стремимся обеспечить максимальную защиту и конфиденциальность,
         постоянно совершенствуя наши технологии. С Yops Ваша цифровая жизнь будет в безопасности!
       </Text>
-
-      <Group className={classes.controls}>
-        <a href="#price">
-          <Button
-            size="xl"
-            className={classes.control}
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-          >
-            Купить сервер
-          </Button>
-        </a>
-      </Group>
     </Container>
   </div>
 );

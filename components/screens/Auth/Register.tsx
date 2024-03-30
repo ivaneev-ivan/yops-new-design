@@ -14,22 +14,33 @@ import {
 } from '@mantine/core';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import classes from './Login.module.scss';
+import { useForm } from '@mantine/form';
 
 const initState = { email: '', password: '', password1: '' };
 
 const RegisterScreen = () => {
+  const form = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+      password1: '',
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Неправильный email'),
+      password: (value) => (value.length < 6 ? 'Пароль слишком короткий' : null),
+      password1: (value) => (value.length < 6 ? 'Пароль слишком короткий' : null),
+    },
+  });
   const [data, setData] = useState(initState);
   const [IsPasswordNotCorrect, setIsPasswordNotCorrect] = useState(false);
   const [registerUser, { isLoading, isError, error, isSuccess }] = useRegisterUserMutation();
-  const onInputChange = (e: FormEvent<HTMLInputElement>, key: string) => {
-    setData({ ...data, [key]: e.currentTarget.value });
-  };
+
   if (isSuccess) {
     redirect('/profile/new/');
   }
-  const onSubmit = () => {
+  const onSubmit = (data: { email: string; password: string; password1: string }) => {
     if (data.password !== data.password1) {
       setIsPasswordNotCorrect(true);
       return;
@@ -49,7 +60,7 @@ const RegisterScreen = () => {
             <Loader />
           </Center>
         ) : (
-          <>
+          <form onSubmit={form.onSubmit(onSubmit)}>
             {IsPasswordNotCorrect && (
               <ErrorAlert title="non_field_errors" errors={['Пароли не совпадают']} />
             )}
@@ -67,31 +78,35 @@ const RegisterScreen = () => {
               </>
             )}
             <TextInput
-              value={data.email}
-              onInput={(e) => onInputChange(e, 'email')}
+              withAsterisk
+              {...form.getInputProps('email')}
+              // value={data.email}
+              // onInput={(e) => onInputChange(e, 'email')}
               label="Email адрес"
               placeholder="fastvpn@mail.ru"
               size="md"
             />
             <PasswordInput
-              value={data.password}
-              onInput={(e) => onInputChange(e, 'password')}
+              // value={data.password}
+              // onInput={(e) => onInputChange(e, 'password')}
+              {...form.getInputProps('password')}
               label="Пароль"
               placeholder="Ваш пароль"
               mt="md"
-              error={IsPasswordNotCorrect}
+              // error={IsPasswordNotCorrect}
               size="md"
             />
             <PasswordInput
-              value={data.password1}
-              onInput={(e) => onInputChange(e, 'password1')}
+              // value={data.password1}
+              // onInput={(e) => onInputChange(e, 'password1')}
               label="Пароль"
+              {...form.getInputProps('password1')}
               error={IsPasswordNotCorrect}
               placeholder="Повторите ваш пароль"
               mt="md"
               size="md"
             />
-            <Button onClick={onSubmit} fullWidth mt="xl" size="md">
+            <Button type="submit" fullWidth mt="xl" size="md">
               Зарегистрироваться
             </Button>
             <Text ta="center" mt="md">
@@ -100,7 +115,7 @@ const RegisterScreen = () => {
                 Войти
               </Link>
             </Text>
-          </>
+          </form>
         )}
       </Paper>
     </div>

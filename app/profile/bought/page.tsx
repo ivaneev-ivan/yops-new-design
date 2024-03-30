@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/screens/Profile/Navbar/Navbar';
+import { Navbar } from '@/components/ui/Navbar/Navbar';
 
 export const metadata = {
   title: 'Личный кабинет | Новый заказ',
