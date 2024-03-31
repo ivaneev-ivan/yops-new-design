@@ -5,7 +5,8 @@ import { logout } from '@/context/features/UserSlice';
 import { useAppDispatch, useAppSelector } from '@/context/store';
 import { Box, Button, Group } from '@mantine/core';
 import Link from 'next/link';
-import classes from './Header.module.scss';
+import classes from '@/components/ui/Header/Header.module.scss';
+
 
 const Header = () => {
   const user = useAppSelector((state) => state.userState.user);

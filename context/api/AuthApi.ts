@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { userApi } from './UserApi';
+import { userApi } from '@/context/api/UserApi';
 
 interface IAuthData {
   email: string;

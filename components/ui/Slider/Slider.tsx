@@ -1,5 +1,6 @@
 import { NumberInput, Slider } from '@mantine/core';
-import classes from './Slider.module.scss';
+import classes from '@/components/ui/Slider/Slider.module.scss';
+
 
 interface ISlider {
   min: number;

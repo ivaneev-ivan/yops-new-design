@@ -2,7 +2,8 @@
 
 import { Card, rem, Text, useMantineTheme } from '@mantine/core';
 import { IconGauge, IconSettings, IconUser } from '@tabler/icons-react';
-import classes from './Features.module.scss';
+import classes from '@/components/ui/Features/Features.module.scss';
+
 import YopsVpn from '@/components/ui/YopsVpn';
 import SectionCardsLayout from '@/components/ui/SectionCardsLayout/SectionCardsLayout';
 

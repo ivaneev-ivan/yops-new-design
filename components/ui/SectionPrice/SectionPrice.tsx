@@ -9,7 +9,6 @@ const SectionPrice: FC<{ services: Service[] }> = ({ services }) => (
       <CardPrice
         title={el.title}
         price={el.solar}
-        description={el.description}
         key={`price card ${el.id}`}
       />
     ))}

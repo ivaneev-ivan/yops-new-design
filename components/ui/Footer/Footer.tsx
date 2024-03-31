@@ -3,7 +3,8 @@
 import { ActionIcon, Anchor, Group, rem } from '@mantine/core';
 import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
 import Link from 'next/link';
-import classes from './Footer.module.scss';
+import classes from '@/components/ui/Footer/Footer.module.scss';
+
 import Logo from '@/components/ui/Logo';
 
 const links = [

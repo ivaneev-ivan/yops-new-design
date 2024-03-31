@@ -1,7 +1,6 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import Header from '@/components/ui/Header/Header';
 import '@mantine/core/styles.css';
-import { theme } from '@/theme';
 import Footer from '@/components/ui/Footer/Footer';
 import ContextProvider from '@/context/ContextProvider';
 
@@ -18,7 +17,7 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <ContextProvider>
-          <MantineProvider theme={theme}>
+          <MantineProvider>
             <Header />
             {children}
             <Footer />

@@ -7,7 +7,8 @@ import { useForm } from '@mantine/form';
 import { Navbar } from '@/components/ui/Navbar/Navbar';
 import SliderInput from '@/components/ui/Slider/Slider';
 import { QuestionIcon } from '@storybook/icons';
-import classes from './NewOrder.module.scss';
+import classes from '@/components/screens/Profile/New/NewOrder.module.scss';
+
 import { useCreateOrderMutation } from '@/context/api/OrderApi';
 
 const locations = ['Россия', 'Казахстан'];

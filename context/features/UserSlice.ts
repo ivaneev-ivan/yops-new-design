@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../api/types';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IUser} from '@/context/api/types';
 
 interface IUserState {
   user: IUser | null;
@@ -22,4 +22,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { logout, setUser } = userSlice.actions;
+export const {logout, setUser} = userSlice.actions;

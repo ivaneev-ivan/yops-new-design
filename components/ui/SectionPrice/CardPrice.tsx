@@ -2,7 +2,8 @@
 
 import { Button, Card, Group, Text } from '@mantine/core';
 import { FC } from 'react';
-import classes from './CardPrice.module.scss';
+import classes from '@/components/ui/SectionPrice/CardPrice.module.scss';
+
 import { useAppSelector } from '@/context/store';
 import Link from 'next/link';
 

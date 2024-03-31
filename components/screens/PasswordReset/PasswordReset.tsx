@@ -12,7 +12,8 @@ import {
   Title,
 } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
-import classes from './PasswordReset.module.scss';
+import classes from '@/components/screens/PasswordReset/PasswordReset.module.scss';
+
 
 const PasswordReset = () => (
   <Paper className={classes.form}>

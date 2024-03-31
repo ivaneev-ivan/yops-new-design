@@ -1,5 +1,6 @@
 import { Container, Text } from '@mantine/core';
-import classes from './HeroTitle.module.scss';
+import classes from '@/components/ui/HeroTitile/HeroTitle.module.scss';
+
 import YopsVpn from '@/components/ui/YopsVpn';
 
 const HeroTitle = () => (
