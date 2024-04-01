@@ -1,17 +1,15 @@
 'use client';
 
+import classes from '@/components/ui/Navbar/Navbar.module.scss';
 import { Group, Paper } from '@mantine/core';
-import { IconBox, IconProps, IconShoppingCart } from '@tabler/icons-react';
+import { IconBox, IconShoppingCart } from '@tabler/icons-react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import classes from '@/components/ui/Navbar/Navbar.module.scss';
 
 interface INavbarLink {
   link: string;
   label: string;
-  icon: React.ForwardRefExoticComponent<
-    Omit<IconProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >;
+  icon: any;
 }
 
 const data: INavbarLink[] = [
