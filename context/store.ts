@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { authApi } from '@/context/api/AuthApi';
 import { userApi } from '@/context/api/UserApi';
 import userReducer from '@/context/features/UserSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const KEY = 'redux-storage';
 

@@ -1,6 +1,6 @@
 import { Button, Container, Group, Text, Title } from '@mantine/core';
 import Link from 'next/link';
-import { Illustration } from './Illustration';
+import { Illustration } from '@/components/ui/NotFound/Illustration';
 import classes from '@/components/ui/NotFound/NotFound.module.scss';
 
 
