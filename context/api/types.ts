@@ -17,3 +17,9 @@ export interface IOrder {
   location: number;
   solar: number;
 }
+
+export type IService = {
+  id: number;
+  title: string;
+  solar: number;
+};

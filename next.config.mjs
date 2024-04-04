@@ -15,4 +15,9 @@ export default withBundleAnalyzer({
   sassOptions: {
     prependData: `@import "./_mantine.scss";`,
   },
+  resolve: {
+    alias: {
+      "@": "./",
+    },
+  },
 });

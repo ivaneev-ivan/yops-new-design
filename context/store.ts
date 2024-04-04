@@ -1,8 +1,9 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { authApi } from '@/context/api/AuthApi';
 import { userApi } from '@/context/api/UserApi';
 import userReducer from '@/context/features/UserSlice';
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { serviceApi } from '@/context/api/ServiceApi';
 
 const KEY = 'redux-storage';
 
@@ -29,12 +30,13 @@ export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [serviceApi.reducerPath]: serviceApi.reducer,
     userState: userReducer,
   },
   // preloadedState: loadState(),
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({}).concat([authApi.middleware, userApi.middleware]),
+    getDefaultMiddleware({}).concat([authApi.middleware, userApi.middleware, serviceApi.middleware]),
 });
 
 store.subscribe(() => {
