@@ -36,6 +36,7 @@ export const store = configureStore({
   // preloadedState: loadState(),
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
+    // eslint-disable-next-line max-len
     getDefaultMiddleware({}).concat([authApi.middleware, userApi.middleware, serviceApi.middleware]),
 });
 
