@@ -1,27 +1,27 @@
-import { authApi } from '@/context/api/AuthApi';
-import { serviceApi } from '@/context/api/ServiceApi';
-import { userApi } from '@/context/api/UserApi';
-import userReducer from '@/context/features/UserSlice';
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { orderApi } from './api/OrderApi';
+import { authApi } from '@/context/api/AuthApi'
+import { serviceApi } from '@/context/api/ServiceApi'
+import { userApi } from '@/context/api/UserApi'
+import userReducer from '@/context/features/UserSlice'
+import { configureStore } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { orderApi } from './api/OrderApi'
 
-const KEY = 'redux-storage';
+const KEY = 'redux-storage'
 
 export function loadState() {
   try {
-    const serializedState = localStorage.getItem(KEY);
-    if (!serializedState) return {};
-    return JSON.parse(serializedState);
+    const serializedState = localStorage.getItem(KEY)
+    if (!serializedState) return {}
+    return JSON.parse(serializedState)
   } catch (e) {
-    return {};
+    return {}
   }
 }
 
 export async function saveState(state: any) {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem(KEY, serializedState);
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem(KEY, serializedState)
   } catch (e) {
     // Ignore
   }
@@ -29,29 +29,31 @@ export async function saveState(state: any) {
 
 export const store = configureStore({
   reducer: {
+    // @ts-ignore
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [serviceApi.reducerPath]: serviceApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     userState: userReducer,
   },
-  // preloadedState: loadState(),
+  preloadedState: loadState(),
   devTools: process.env.NODE_ENV === 'development',
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     // eslint-disable-next-line max-len
+    // @ts-ignore
     getDefaultMiddleware({}).concat([
       authApi.middleware,
       userApi.middleware,
       serviceApi.middleware,
       orderApi.middleware,
     ]),
-});
+})
 
 store.subscribe(() => {
-  saveState(store.getState());
-});
+  saveState(store.getState())
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
