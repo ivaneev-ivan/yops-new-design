@@ -1,32 +1,32 @@
-'use client';
+'use client'
 
-import { Button, Card, Group, Text } from '@mantine/core';
-import { FC } from 'react';
-import classes from '@/components/ui/SectionPrice/CardPrice.module.scss';
+import classes from '@/components/ui/SectionPrice/CardPrice.module.scss'
+import { Button, Card, Group, Text } from '@mantine/core'
+import { FC } from 'react'
 
-import { useAppSelector } from '@/context/store';
-import Link from 'next/link';
+import { useAppSelector } from '@/context/store'
+import Link from 'next/link'
 
 interface ICardPrice {
-  title: string;
-  price: number;
-  description?: string;
+  title: string
+  price: number
+  description?: string
 }
 
 const CardPrice: FC<ICardPrice> = ({ price, title, description }) => {
-  const user = useAppSelector((state) => state.userState.user);
-  const url = user === null ? '/login' : '/profile/new/';
-  const text = user === null ? 'Войти' : 'Купить';
+  const user = useAppSelector(state => state.userState.user)
+  const url = user === null ? '/login' : '/profile/new/'
+  const text = user === null ? 'Войти' : 'Купить'
   return (
-    <Card shadow="md" radius="md" className={classes.card} padding="xl">
-      <Text fz="xl" fw={700} className={classes.cardTitle} mt="md">
+    <Card shadow='md' radius='md' className={classes.card} padding='xl'>
+      <Text fz='xl' fw={700} className={classes.cardTitle} mt='md'>
         {title}
       </Text>
-      <Text fz="sm" c="dimmed" mt="sm">
+      <Text fz='sm' c='dimmed' mt='sm'>
         {description}
       </Text>
-      <Group mt={20} justify="space-between">
-        <Text fz="xl" fw={700}>
+      <Group mt={20} justify='space-between'>
+        <Text fz='xl' fw={700}>
           {price} ₽
         </Text>
         <Link href={url}>
@@ -34,7 +34,7 @@ const CardPrice: FC<ICardPrice> = ({ price, title, description }) => {
         </Link>
       </Group>
     </Card>
-  );
-};
+  )
+}
 
-export default CardPrice;
+export default CardPrice

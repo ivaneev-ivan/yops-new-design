@@ -2,6 +2,6 @@ FROM node:alpine
 WORKDIR /usr/app/
 RUN npm install --global pm2
 COPY . .
-RUN npm install --production
+RUN npm install --emit=dev
 RUN npm run build
-CMD [ "pm2-runtime", "npm", "--", "start" ]
+CMD [ "npm", "--", "start" ]

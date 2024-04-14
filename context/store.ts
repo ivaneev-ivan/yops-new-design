@@ -1,9 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { authApi } from '@/context/api/AuthApi';
+import { serviceApi } from '@/context/api/ServiceApi';
 import { userApi } from '@/context/api/UserApi';
 import userReducer from '@/context/features/UserSlice';
-import { serviceApi } from '@/context/api/ServiceApi';
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { orderApi } from './api/OrderApi';
 
 const KEY = 'redux-storage';
 
@@ -31,13 +32,19 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [serviceApi.reducerPath]: serviceApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
     userState: userReducer,
   },
   // preloadedState: loadState(),
   devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
     // eslint-disable-next-line max-len
-    getDefaultMiddleware({}).concat([authApi.middleware, userApi.middleware, serviceApi.middleware]),
+    getDefaultMiddleware({}).concat([
+      authApi.middleware,
+      userApi.middleware,
+      serviceApi.middleware,
+      orderApi.middleware,
+    ]),
 });
 
 store.subscribe(() => {

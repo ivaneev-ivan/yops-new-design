@@ -1,8 +1,8 @@
-import bundleAnalyzer from '@next/bundle-analyzer';
+import bundleAnalyzer from '@next/bundle-analyzer'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-});
+})
 
 export default withBundleAnalyzer({
   reactStrictMode: false,
@@ -17,7 +17,7 @@ export default withBundleAnalyzer({
   },
   resolve: {
     alias: {
-      "@": "./",
+      '@': './',
     },
   },
-});
+})

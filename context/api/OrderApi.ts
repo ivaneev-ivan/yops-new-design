@@ -1,33 +1,46 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IOrder } from '@/context/api/types';
+import { ICreateOrderData, IOrder } from '@/context/api/types'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string;
+const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string
 
 export const orderApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: 'orderApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/orders`,
   }),
   tagTypes: ['Order'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getOrders: builder.query<IOrder[], string>({
       query(token: string) {
         return {
-          url: '',
+          url: '/',
           headers: { Authorization: `Token ${token}` },
-        };
+        }
       },
     }),
-    createOrder: builder.mutation<IOrder, Omit<Omit<Omit<IOrder, 'id'>, 'user'>, 'solar'>>({
-      query(data) {
+    getOrderDetail: builder.query<IOrder, { id: number; token: string }>({
+      query({ id, token }) {
         return {
-          url: '',
+          url: `/${id}/`,
+          headers: { Authorization: `Token ${token}` },
+        }
+      },
+    }),
+    createOrder: builder.mutation<IOrder, ICreateOrderData>({
+      query({ accessToken, count_configs, is_own_server, location }) {
+        return {
+          url: '/',
           method: 'POST',
-          body: data,
-        };
+          body: { count_configs, is_own_server, location },
+          headers: { Authorization: `Token ${accessToken}` },
+        }
       },
     }),
   }),
-});
+})
 
-export const { useGetOrdersQuery, useCreateOrderMutation } = orderApi;
+export const {
+  useGetOrdersQuery,
+  useCreateOrderMutation,
+  useGetOrderDetailQuery,
+} = orderApi

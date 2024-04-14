@@ -1,13 +1,9 @@
-import { Navbar } from '@/components/ui/Navbar/Navbar';
+import Orders from '@/components/screens/Profile/Orders/Orders';
 
 export const metadata = {
   title: 'Личный кабинет | Новый заказ',
 };
 
-const Page = () => (
-  <Navbar current="/profile/bought/">
-    <div>Hello world</div>
-  </Navbar>
-);
+const Page = () => <Orders />;
 
 export default Page;
