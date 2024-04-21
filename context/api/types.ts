@@ -40,3 +40,8 @@ export interface ICreateOrderData {
   location: number
   accessToken: string
 }
+
+export interface IConfig {
+  id: number
+  accessUrl: string
+}

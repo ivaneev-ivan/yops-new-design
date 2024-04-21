@@ -11,7 +11,10 @@ const OrderCard: FC<IOrder> = props => {
       </Group>
       <Text size='md'>Дата создания: {props.create_at.split('T')[0]}</Text>
       <Text size='md'>Стоимость: {props.solar}</Text>
-      <Text size='md'>Статус заказа: {statusCard[props.status]}</Text>
+      <Text size='md'>
+        Статус заказа:{' '}
+        {statusCard[props.status] ? statusCard[props.status] : 'Выполнен'}
+      </Text>
       {props.is_payed ? (
         <Link href={`/profile/bought/${props.id}/`}>
           <Button color='blue' fullWidth mt='md' radius='md'>

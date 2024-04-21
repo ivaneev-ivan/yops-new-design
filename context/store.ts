@@ -1,4 +1,5 @@
 import { authApi } from '@/context/api/AuthApi'
+import { configApi } from '@/context/api/ConfigApi'
 import { serviceApi } from '@/context/api/ServiceApi'
 import { userApi } from '@/context/api/UserApi'
 import userReducer from '@/context/features/UserSlice'
@@ -34,6 +35,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [serviceApi.reducerPath]: serviceApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
+    [configApi.reducerPath]: configApi.reducer,
     userState: userReducer,
   },
   preloadedState: loadState(),
@@ -46,13 +48,14 @@ export const store = configureStore({
       userApi.middleware,
       serviceApi.middleware,
       orderApi.middleware,
+      configApi.middleware,
     ]),
 })
 
 store.subscribe(() => {
   saveState(store.getState())
 })
-
+//@ts-ignore
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()

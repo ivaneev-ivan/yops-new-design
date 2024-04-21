@@ -36,7 +36,11 @@ const NewOrder = () => {
   const token = useAccessToken()
   const [createOrder, { isLoading, isSuccess, data }] = useCreateOrderMutation()
   const { data: locations, isLoading: isLoadingLocations } =
-    useGetServicesQuery(null)
+    useGetServicesQuery(null, {
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+      pollingInterval: 10000,
+    })
   const [price, setPrice] = useState(100)
   const locationsList =
     locations !== undefined ? locations.map(el => el.title) : []
@@ -46,12 +50,12 @@ const NewOrder = () => {
     if (locations === undefined) {
       return null
     }
-    for (let i; i < locations.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
       if (locations[i].title === title) {
         return locations[i]
       }
     }
-    return locations[0]
+    // return locations[0]
   }
 
   if (isSuccess) {
@@ -60,7 +64,13 @@ const NewOrder = () => {
 
   useEffect(() => {
     if (form.values.createOwnServer && !isLoadingLocations) {
-      let basePrice = getLocation(form.values.location).solar
+      let locationPrice = getLocation(form.values.location)
+      let basePrice = 0
+      if (locationPrice === undefined) {
+        basePrice = 300
+      } else {
+        basePrice = locationPrice.solar
+      }
       basePrice += form.values.countConfigs * 25
       setPrice(basePrice)
     } else {
