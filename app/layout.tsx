@@ -1,8 +1,8 @@
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import Header from '@/components/ui/Header/Header';
-import '@mantine/core/styles.css';
-import Footer from '@/components/ui/Footer/Footer';
-import ContextProvider from '@/context/ContextProvider';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import Header from '@/components/ui/Header/Header'
+import '@mantine/core/styles.css'
+import Footer from '@/components/ui/Footer/Footer'
+import ContextProvider from '@/context/ContextProvider'
 
 export default function RootLayout({ children }: { children: any }) {
   return (
@@ -25,5 +25,5 @@ export default function RootLayout({ children }: { children: any }) {
         </ContextProvider>
       </body>
     </html>
-  );
+  )
 }

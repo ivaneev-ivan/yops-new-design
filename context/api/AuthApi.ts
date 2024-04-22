@@ -1,18 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { userApi } from '@/context/api/UserApi';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { userApi } from '@/context/api/UserApi'
 
 interface IAuthData {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string;
+const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/auth/`,
   }),
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     loginUser: builder.mutation<{ auth_token: string }, IAuthData>({
       query(data) {
         return {
@@ -20,17 +20,17 @@ export const authApi = createApi({
           method: 'POST',
           body: data,
           // credentials: 'include',
-        };
+        }
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          const a = await queryFulfilled;
-          const token = a.data.auth_token;
-          await dispatch(userApi.endpoints.getMe.initiate(token));
+          const a = await queryFulfilled
+          const token = a.data.auth_token
+          await dispatch(userApi.endpoints.getMe.initiate(token))
         } catch (e) {
           /* empty */
-          console.log('error');
-          console.log(e);
+          console.log('error')
+          console.log(e)
         }
       },
     }),
@@ -40,18 +40,18 @@ export const authApi = createApi({
           url: 'users/',
           method: 'POST',
           body: data,
-        };
+        }
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
-          await dispatch(authApi.endpoints?.loginUser.initiate(args));
+          await queryFulfilled
+          await dispatch(authApi.endpoints?.loginUser.initiate(args))
         } catch (error) {
           /* empty */
         }
       },
     }),
   }),
-});
+})
 
-export const { useLoginUserMutation, useRegisterUserMutation } = authApi;
+export const { useLoginUserMutation, useRegisterUserMutation } = authApi

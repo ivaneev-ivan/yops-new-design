@@ -1,16 +1,15 @@
-import { NumberInput, Slider } from '@mantine/core';
-import classes from '@/components/ui/Slider/Slider.module.scss';
-
+import { NumberInput, Slider } from '@mantine/core'
+import classes from '@/components/ui/Slider/Slider.module.scss'
 
 interface ISlider {
-  min: number;
-  max: number;
-  step: number;
-  value?: number | string;
-  label: string;
-  placeholder: string;
-  error?: string;
-  onChange?: (a: number | string) => void;
+  min: number
+  max: number
+  step: number
+  value?: number | string
+  label: string
+  placeholder: string
+  error?: string
+  onChange?: (a: number | string) => void
 }
 
 export default function SliderInput({
@@ -47,5 +46,5 @@ export default function SliderInput({
         classNames={classes}
       />
     </div>
-  );
+  )
 }

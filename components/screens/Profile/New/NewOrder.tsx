@@ -16,13 +16,13 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useHover } from '@mantine/hooks'
-import { QuestionIcon } from '@storybook/icons'
 import { useEffect, useState } from 'react'
 
 import { useCreateOrderMutation } from '@/context/api/OrderApi'
 import { useGetServicesQuery } from '@/context/api/ServiceApi'
 
 import useAccessToken from '@/hooks/useAccessToken'
+import { IconBasketQuestion } from '@tabler/icons-react'
 import { redirect } from 'next/navigation'
 
 const NewOrder = () => {
@@ -110,13 +110,14 @@ const NewOrder = () => {
               <Group style={{ width: '100%' }}>
                 <Switch
                   mt='md'
+                  disabled={true}
                   label='Создавать собственный VPN сервер'
                   {...form.getInputProps('createOwnServer', {
                     type: 'checkbox',
                   })}
                 />
                 <div className={classes.iconSection} ref={ref}>
-                  <QuestionIcon size={18} />
+                  <IconBasketQuestion size={18} />
                 </div>
               </Group>
               {hovered && (

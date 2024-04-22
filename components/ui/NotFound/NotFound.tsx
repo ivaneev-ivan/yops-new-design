@@ -1,8 +1,7 @@
-import { Button, Container, Group, Text, Title } from '@mantine/core';
-import Link from 'next/link';
-import { Illustration } from '@/components/ui/NotFound/Illustration';
-import classes from '@/components/ui/NotFound/NotFound.module.scss';
-
+import { Button, Container, Group, Text, Title } from '@mantine/core'
+import Link from 'next/link'
+import { Illustration } from '@/components/ui/NotFound/Illustration'
+import classes from '@/components/ui/NotFound/NotFound.module.scss'
 
 const NotFound = () => (
   <Container className={classes.root}>
@@ -10,19 +9,19 @@ const NotFound = () => (
       <Illustration className={classes.image} />
       <div className={classes.content}>
         <Title className={classes.title}>Ничего не найдено</Title>
-        <Text c="dimmed" size="lg" ta="center" className={classes.description}>
-          Страница, которую вы пытаетесь открыть, не существует. Возможно, вы ошиблись в адресе или
-          страница была перемещена на другой URL. Если вы считаете, что это ошибка, обратитесь в
-          службу поддержки.
+        <Text c='dimmed' size='lg' ta='center' className={classes.description}>
+          Страница, которую вы пытаетесь открыть, не существует. Возможно, вы
+          ошиблись в адресе или страница была перемещена на другой URL. Если вы
+          считаете, что это ошибка, обратитесь в службу поддержки.
         </Text>
-        <Group justify="center">
-          <Link href="/">
-            <Button size="md">Перейти на Главную страницу</Button>
+        <Group justify='center'>
+          <Link href='/'>
+            <Button size='md'>Перейти на Главную страницу</Button>
           </Link>
         </Group>
       </div>
     </div>
   </Container>
-);
+)
 
-export default NotFound;
+export default NotFound

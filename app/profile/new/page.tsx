@@ -1,9 +1,9 @@
-import NewOrder from '@/components/screens/Profile/New/NewOrder';
+import NewOrder from '@/components/screens/Profile/New/NewOrder'
 
 export const metadata = {
   title: 'Личный кабинет | Новый заказ',
-};
+}
 
-const Page = () => <NewOrder />;
+const Page = () => <NewOrder />
 
-export default Page;
+export default Page

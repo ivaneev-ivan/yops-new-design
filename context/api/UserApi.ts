@@ -1,8 +1,8 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {setUser} from '@/context/features/UserSlice';
-import {IUser} from '@/context/api/types';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { setUser } from '@/context/features/UserSlice'
+import { IUser } from '@/context/api/types'
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string;
+const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -10,18 +10,18 @@ export const userApi = createApi({
     baseUrl: `${BASE_URL}/auth/users/`,
   }),
   tagTypes: ['User'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getMe: builder.query<IUser, string>({
       query(token: string) {
         return {
           url: 'me/',
-          headers: {Authorization: `Token ${token}`},
-        };
+          headers: { Authorization: `Token ${token}` },
+        }
       },
-      async onQueryStarted(args, {dispatch, queryFulfilled}) {
-        const {data} = await queryFulfilled;
-        await dispatch(setUser({...data, accessToken: args}));
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled
+        await dispatch(setUser({ ...data, accessToken: args }))
       },
     }),
   }),
-});
+})

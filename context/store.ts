@@ -1,61 +1,47 @@
-import { authApi } from '@/context/api/AuthApi'
-import { configApi } from '@/context/api/ConfigApi'
-import { serviceApi } from '@/context/api/ServiceApi'
-import { userApi } from '@/context/api/UserApi'
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
+import storage from 'redux-persist/lib/storage'
+import {persistReducer, persistStore} from 'redux-persist'
+import {authApi} from '@/context/api/AuthApi'
+import {configApi} from '@/context/api/ConfigApi'
+import {serviceApi} from '@/context/api/ServiceApi'
+import {userApi} from '@/context/api/UserApi'
 import userReducer from '@/context/features/UserSlice'
-import { configureStore } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { orderApi } from './api/OrderApi'
+import {orderApi} from './api/OrderApi'
 
-const KEY = 'redux-storage'
-
-export function loadState() {
-  try {
-    const serializedState = localStorage.getItem(KEY)
-    if (!serializedState) return {}
-    return JSON.parse(serializedState)
-  } catch (e) {
-    return {}
-  }
+const persistConfig = {
+  key: 'root',
+  storage,
 }
 
-export async function saveState(state: any) {
-  try {
-    const serializedState = JSON.stringify(state)
-    localStorage.setItem(KEY, serializedState)
-  } catch (e) {
-    // Ignore
-  }
-}
+const reducer = combineReducers({
+  // @ts-ignore
+  [authApi.reducerPath]: authApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
+  [serviceApi.reducerPath]: serviceApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
+  [configApi.reducerPath]: configApi.reducer,
+  userState: userReducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, reducer)
 
 export const store = configureStore({
-  reducer: {
-    // @ts-ignore
-    [authApi.reducerPath]: authApi.reducer,
-    [userApi.reducerPath]: userApi.reducer,
-    [serviceApi.reducerPath]: serviceApi.reducer,
-    [orderApi.reducerPath]: orderApi.reducer,
-    [configApi.reducerPath]: configApi.reducer,
-    userState: userReducer,
-  },
-  preloadedState: loadState(),
+  reducer: persistedReducer,
   devTools: process.env.NODE_ENV === 'development',
-  middleware: getDefaultMiddleware =>
-    // eslint-disable-next-line max-len
-    // @ts-ignore
-    getDefaultMiddleware({}).concat([
+  //@ts-ignore
+  middleware: getDefaultMiddleware => {
+    return getDefaultMiddleware({}).concat([
       authApi.middleware,
       userApi.middleware,
       serviceApi.middleware,
       orderApi.middleware,
       configApi.middleware,
-    ]),
+    ]);
+  },
 })
 
-store.subscribe(() => {
-  saveState(store.getState())
-})
-//@ts-ignore
+export const persistor = persistStore(store)
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
