@@ -1,6 +1,4 @@
 export interface IUser {
-  email: string
-  id: number
   accessToken: string
 }
 
@@ -21,6 +19,7 @@ export interface IOrder {
   user: number
   location: number
   status: string
+  services: string[]
   payment_url: string
   is_payed: boolean
   solar: number
@@ -37,6 +36,7 @@ export type IService = {
 export interface ICreateOrderData {
   count_configs: number
   is_own_server: boolean
+  services: string[]
   location: number
   accessToken: string
 }

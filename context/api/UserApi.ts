@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setUser } from '@/context/features/UserSlice'
 import { IUser } from '@/context/api/types'
+import { setUser } from '@/context/features/UserSlice'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT as string
 

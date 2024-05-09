@@ -1,5 +1,5 @@
+import { setUser } from '@/context/features/UserSlice'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { userApi } from '@/context/api/UserApi'
 
 interface IAuthData {
   email: string
@@ -23,15 +23,9 @@ export const authApi = createApi({
         }
       },
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const a = await queryFulfilled
-          const token = a.data.auth_token
-          await dispatch(userApi.endpoints.getMe.initiate(token))
-        } catch (e) {
-          /* empty */
-          console.log('error')
-          console.log(e)
-        }
+        const a = await queryFulfilled
+        const token = a.data.auth_token
+        await dispatch(setUser({ accessToken: token }))
       },
     }),
     registerUser: builder.mutation<void, IAuthData>({

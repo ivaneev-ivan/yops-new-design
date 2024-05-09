@@ -1,13 +1,22 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
-import storage from 'redux-persist/lib/storage'
-import {persistReducer, persistStore} from 'redux-persist'
-import {authApi} from '@/context/api/AuthApi'
-import {configApi} from '@/context/api/ConfigApi'
-import {serviceApi} from '@/context/api/ServiceApi'
-import {userApi} from '@/context/api/UserApi'
+import { authApi } from '@/context/api/AuthApi'
+import { configApi } from '@/context/api/ConfigApi'
+import { serviceApi } from '@/context/api/ServiceApi'
+import { userApi } from '@/context/api/UserApi'
 import userReducer from '@/context/features/UserSlice'
-import {orderApi} from './api/OrderApi'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { orderApi } from './api/OrderApi'
 
 const persistConfig = {
   key: 'root',
@@ -31,13 +40,17 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
   //@ts-ignore
   middleware: getDefaultMiddleware => {
-    return getDefaultMiddleware({}).concat([
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat([
       authApi.middleware,
       userApi.middleware,
       serviceApi.middleware,
       orderApi.middleware,
       configApi.middleware,
-    ]);
+    ])
   },
 })
 
