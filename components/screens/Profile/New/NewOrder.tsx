@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 'use client'
 
 import classes from '@/components/screens/Profile/New/NewOrder.module.scss'
@@ -16,14 +17,14 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useHover } from '@mantine/hooks'
+import { IconBasketQuestion } from '@tabler/icons-react'
+import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useCreateOrderMutation } from '@/context/api/OrderApi'
 import { useGetServicesQuery } from '@/context/api/ServiceApi'
 
 import useAccessToken from '@/hooks/useAccessToken'
-import { IconBasketQuestion } from '@tabler/icons-react'
-import { redirect } from 'next/navigation'
 
 const NewOrder = () => {
   const form = useForm({
@@ -31,6 +32,7 @@ const NewOrder = () => {
       countConfigs: 10,
       createOwnServer: true,
       location: 'Россия',
+      createFileServer: false,
     },
   })
   const token = useAccessToken()
@@ -55,6 +57,7 @@ const NewOrder = () => {
         return locations[i]
       }
     }
+    return null
     // return locations[0]
   }
 
@@ -64,7 +67,7 @@ const NewOrder = () => {
 
   useEffect(() => {
     if (form.values.createOwnServer && !isLoadingLocations) {
-      let locationPrice = getLocation(form.values.location)
+      const locationPrice = getLocation(form.values.location)
       let basePrice = 0
       if (locationPrice === undefined) {
         basePrice = 300
@@ -90,6 +93,7 @@ const NewOrder = () => {
                 count_configs: values.countConfigs,
                 is_own_server: values.createOwnServer,
                 accessToken: token,
+                services: values.createFileServer ? ['vpn', 'files'] : ['vpn'],
               }),
             )}
           >
@@ -110,7 +114,7 @@ const NewOrder = () => {
               <Group style={{ width: '100%' }}>
                 <Switch
                   mt='md'
-                  disabled={true}
+                  disabled
                   label='Создавать собственный VPN сервер'
                   {...form.getInputProps('createOwnServer', {
                     type: 'checkbox',
@@ -119,6 +123,15 @@ const NewOrder = () => {
                 <div className={classes.iconSection} ref={ref}>
                   <IconBasketQuestion size={18} />
                 </div>
+              </Group>
+              <Group style={{ width: '100%' }}>
+                <Switch
+                  mt='md'
+                  label='Создавать файловое хранилище на сервере'
+                  {...form.getInputProps('createFileServer', {
+                    type: 'checkbox',
+                  })}
+                />
               </Group>
               {hovered && (
                 <div>

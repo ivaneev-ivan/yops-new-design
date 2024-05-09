@@ -19,7 +19,7 @@ const ConfigTable: FC<{ configs: IConfig[] }> = ({ configs }) => {
         </Table.Thead>
         <Table.Tbody>
           {configs.map((config, el) => (
-            <Table.Tr key={config.id}>
+            <Table.Tr key={'Token ' + config.id}>
               <Table.Td>{el + 1}</Table.Td>
               <Table.Td>
                 {config.accessUrl.slice(0, 30) + '...'}{' '}

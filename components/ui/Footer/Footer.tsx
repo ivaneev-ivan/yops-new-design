@@ -1,22 +1,14 @@
 'use client'
 
-import { ActionIcon, Anchor, Group, rem } from '@mantine/core'
-import {
-  IconBrandInstagram,
-  IconBrandTwitter,
-  IconBrandYoutube,
-} from '@tabler/icons-react'
-import Link from 'next/link'
 import classes from '@/components/ui/Footer/Footer.module.scss'
+import { Anchor, Group } from '@mantine/core'
+import Link from 'next/link'
 
 import Logo from '@/components/ui/Logo'
 
 const links = [
-  { link: '#', label: 'Contact' },
-  { link: '#', label: 'Privacy' },
-  { link: '#', label: 'Blog' },
-  { link: '#', label: 'Store' },
-  { link: '#', label: 'Careers' },
+  { link: '#', label: 'Конакты' },
+  { link: '#', label: 'Политики конфидециальности' },
 ]
 
 const Footer = () => {
@@ -40,26 +32,6 @@ const Footer = () => {
           <Logo />
         </Link>
         <Group className={classes.links}>{items}</Group>
-        <Group gap='xs' justify='flex-end' wrap='nowrap'>
-          <ActionIcon size='lg' variant='default' radius='xl'>
-            <IconBrandTwitter
-              style={{ width: rem(18), height: rem(18) }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-          <ActionIcon size='lg' variant='default' radius='xl'>
-            <IconBrandYoutube
-              style={{ width: rem(18), height: rem(18) }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-          <ActionIcon size='lg' variant='default' radius='xl'>
-            <IconBrandInstagram
-              style={{ width: rem(18), height: rem(18) }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Group>
       </div>
     </div>
   )

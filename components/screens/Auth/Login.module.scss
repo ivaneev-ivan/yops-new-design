@@ -5,7 +5,8 @@
 }
 
 .form {
-  border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+  border-right: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
   min-height: rem(900px);
   max-width: rem(450px);
   padding-top: rem(80px);
@@ -17,14 +18,15 @@
 
 .title {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-family: Greycliff CF,
-  var(--mantine-font-family);
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
 }
 
 .link {
   text-decoration: none;
   color: #228be6;
-  transition: all ease .5s;
+  transition: all ease 0.5s;
 
   &:hover {
     color: #1185e8;

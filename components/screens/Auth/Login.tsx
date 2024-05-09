@@ -1,6 +1,7 @@
 'use client'
 
 import ErrorAlert from '@/components/screens/Auth/ErrorAlert'
+import classes from '@/components/screens/Auth/Login.module.scss'
 import { useLoginUserMutation } from '@/context/api/AuthApi'
 import {
   Button,
@@ -15,7 +16,6 @@ import {
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useState } from 'react'
-import classes from '@/components/screens/Auth/Login.module.scss'
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({ email: '', password: '' })

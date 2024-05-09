@@ -1,6 +1,7 @@
 'use client'
 
 import ErrorAlert from '@/components/screens/Auth/ErrorAlert'
+import classes from '@/components/screens/Auth/Login.module.scss'
 import { useRegisterUserMutation } from '@/context/api/AuthApi'
 import {
   Button,
@@ -12,11 +13,10 @@ import {
   TextInput,
   Title,
 } from '@mantine/core'
+import { useForm } from '@mantine/form'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useState } from 'react'
-import classes from '@/components/screens/Auth/Login.module.scss'
-import { useForm } from '@mantine/form'
 
 const initState = { email: '', password: '', password1: '' }
 
@@ -76,12 +76,17 @@ const RegisterScreen = () => {
               <>
                 {
                   // @ts-ignore
-                  (error && error.data) ? Object.keys(error.data).map(key => {
-                    // @ts-ignore
-                    // eslint-disable-next-line @typescript-eslint/no-shadow
-                    const data = error.data[key]
-                    return <ErrorAlert key={key} title={key} errors={data} />
-                  }): ''
+                  error && error.data
+                    ? // @ts-ignore
+                      Object.keys(error.data).map(key => {
+                        // @ts-ignore
+                        // eslint-disable-next-line @typescript-eslint/no-shadow
+                        const data = error.data[key]
+                        return (
+                          <ErrorAlert key={key} title={key} errors={data} />
+                        )
+                      })
+                    : ''
                 }
               </>
             )}
