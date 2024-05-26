@@ -18,8 +18,6 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useState } from 'react'
 
-const initState = { email: '', password: '', password1: '' }
-
 const RegisterScreen = () => {
   const form = useForm({
     initialValues: {
@@ -29,11 +27,20 @@ const RegisterScreen = () => {
     },
     validate: {
       email: value => (/^\S+@\S+$/.test(value) ? null : 'Неправильный email'),
-      password: value => (value.length < 6 ? 'Пароль слишком короткий' : null),
-      password1: value => (value.length < 6 ? 'Пароль слишком короткий' : null),
+      password: value =>
+        value.length === 0
+          ? 'Заполните поле'
+          : value.length < 6
+            ? 'Пароль слишком короткий'
+            : null,
+      password1: value =>
+        value.length === 0
+          ? 'Заполните поле'
+          : value.length < 6
+            ? 'Пароль слишком короткий'
+            : null,
     },
   })
-  const [data, setData] = useState(initState)
   const [IsPasswordNotCorrect, setIsPasswordNotCorrect] = useState(false)
   const [registerUser, { isLoading, isError, error, isSuccess }] =
     useRegisterUserMutation()

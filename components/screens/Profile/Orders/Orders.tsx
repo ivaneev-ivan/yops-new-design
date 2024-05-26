@@ -4,11 +4,15 @@ import { Navbar } from '@/components/ui/Navbar/Navbar'
 import { useGetOrdersQuery } from '@/context/api/OrderApi'
 import useAccessToken from '@/hooks/useAccessToken'
 import { Loader, SimpleGrid } from '@mantine/core'
+import { redirect } from 'next/navigation'
 import OrderCard from './OrderCard'
 
 const ProfileScreen = () => {
   const accessToken = useAccessToken()
-  const { data, isLoading, isSuccess } = useGetOrdersQuery(accessToken, {
+  if (accessToken === null) {
+    redirect('/login')
+  }
+  const { data, isLoading } = useGetOrdersQuery(accessToken, {
     refetchOnFocus: true,
     refetchOnReconnect: true,
     pollingInterval: 3000,
@@ -24,7 +28,7 @@ const ProfileScreen = () => {
           verticalSpacing={{ base: 'md', sm: 'xl' }}
         >
           {data.map(el => (
-            <OrderCard {...el} key={el.id} />
+            <OrderCard {...el} key={el.uuid_id} />
           ))}
         </SimpleGrid>
       )}

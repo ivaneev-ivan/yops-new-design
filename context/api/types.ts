@@ -14,6 +14,7 @@ export const statusCard = {
 }
 export interface IOrder {
   id: number
+  uuid_id: string
   count_configs: number
   is_own_server: boolean
   user: number

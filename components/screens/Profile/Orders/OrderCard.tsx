@@ -7,7 +7,7 @@ const OrderCard: FC<IOrder> = props => {
   return (
     <Card shadow='sm' padding='lg' radius='md' withBorder>
       <Group justify='space-between' mt='md' mb='xs'>
-        <Text fw={500}>Заказ #{props.id}</Text>
+        <Text fw={500}>Заказ {props.uuid_id}</Text>
       </Group>
       <Text size='md'>Дата создания: {props.create_at.split('T')[0]}</Text>
       <Text size='md'>Стоимость: {props.solar}</Text>
