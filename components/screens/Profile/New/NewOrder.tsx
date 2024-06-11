@@ -32,9 +32,9 @@ const NewOrder = () => {
             countConfigs: 10,
             createOwnServer: true,
             location: 'Россия',
-            createFileServer: false,
         },
     })
+    const [createFile, setCreateFile] = useState(true);
     const token = useAccessToken()
     const [createOrder, {isLoading, isSuccess, data}] = useCreateOrderMutation()
     const {data: locations, isLoading: isLoadingLocations} =
@@ -88,12 +88,12 @@ const NewOrder = () => {
                     <form
                         style={{width: '100%', height: '100%'}}
                         onSubmit={form.onSubmit(values => {
-                            createOrder({
+                                createOrder({
                                     location: getLocation(values.location).id,
                                     count_configs: values.countConfigs,
                                     is_own_server: values.createOwnServer,
                                     accessToken: token,
-                                    services: values.createFileServer ? ['vpn', 'files'] : ['vpn'],
+                                    services: createFile ? ['vpn', 'files'] : ['vpn'],
                                 })
                             },
                         )}
@@ -129,9 +129,8 @@ const NewOrder = () => {
                                 <Switch
                                     mt='md'
                                     label='Создавать файловое хранилище на сервере'
-                                    {...form.getInputProps('createFileServer', {
-                                        type: 'checkbox',
-                                    })}
+                                    checked={createFile}
+                                    onChange={event => setCreateFile(event.currentTarget.checked)}
                                 />
                             </Group>
                             {hovered && (
