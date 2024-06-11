@@ -2,7 +2,7 @@
 
 import ButtonCopy from '@/components/ui/ClipBoardCopy'
 import { useGetConfigQuery } from '@/context/api/ConfigApi'
-import { useGetOrderDetailQuery } from '@/context/api/OrderApi'
+import {useGetOrderDetailQuery, useGetServerIpQuery} from '@/context/api/OrderApi'
 import { IConfig, statusCard } from '@/context/api/types'
 import useAccessToken from '@/hooks/useAccessToken'
 import { Center, Loader, SimpleGrid, Table, Text, rem } from '@mantine/core'
@@ -51,6 +51,11 @@ const OrderDetail: FC<{ id: number }> = ({ id }) => {
     { pollingInterval: 10000 },
   )
 
+  const {data: dataIp} = useGetServerIpQuery({
+    token,
+    id
+  })
+
   return (
     <div>
       {isLoading || token === null || isLoadingConfig === null ? (
@@ -66,6 +71,7 @@ const OrderDetail: FC<{ id: number }> = ({ id }) => {
             Статус заказа:{' '}
             {statusCard[data.status] ? statusCard[data.status] : 'Выполнен'}
           </Text>
+          {dataIp !== undefined && dataIp !== null && data.services.includes('file') && (<Text size="xl">ip: {dataIp.ip}</Text>)}
           {configData != null && configData.length > 0 ? (
             <>
               <TutorialVpn />

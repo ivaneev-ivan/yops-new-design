@@ -36,11 +36,22 @@ export const orderApi = createApi({
         }
       },
     }),
+    getServerIp: builder.query<{ip: string}, {id: number, token: string}>({
+        query({id, token}) {
+            return {
+                url: `/ip/${id}/`,
+                method: 'GET',
+                headers: { Authorization: `Token ${token}` },
+            }
+        }
+    })
   }),
+
 })
 
 export const {
   useGetOrdersQuery,
   useCreateOrderMutation,
   useGetOrderDetailQuery,
+    useGetServerIpQuery
 } = orderApi
