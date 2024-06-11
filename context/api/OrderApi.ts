@@ -27,11 +27,11 @@ export const orderApi = createApi({
       },
     }),
     createOrder: builder.mutation<IOrder, ICreateOrderData>({
-      query({ accessToken, count_configs, is_own_server, location }) {
+      query({ accessToken, count_configs, is_own_server, location, services }) {
         return {
           url: '/',
           method: 'POST',
-          body: { count_configs, is_own_server, location },
+          body: { count_configs, is_own_server, location, services },
           headers: { Authorization: `Token ${accessToken}` },
         }
       },
