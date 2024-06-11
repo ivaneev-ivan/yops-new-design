@@ -73,7 +73,9 @@ const OrderDetail: FC<{ id: number }> = ({id}) => {
                         {statusCard[data.status] ? statusCard[data.status] : 'Выполнен'}
                     </Text>
                     {dataIp !== undefined && dataIp !== null && data.services.includes('file') && (
-                        <Text size="xl">ip: {dataIp.ip}</Text>)}
+                        <a href={dataIp.ip.replace("https", "http")} target='_blank'>
+                            Ссылка на файловое хранилище
+                        </a>)}
                     {configData != null && configData.length > 0 ? (
                         <>
                             <TutorialVpn/>
